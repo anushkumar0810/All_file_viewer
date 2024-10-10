@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/popup_frag"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/dialog_bg">
+
+        <RelativeLayout
+            android:id="@+id/rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/custom_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="Dear user, "
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/popUp_userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/custom_txt"
+                android:singleLine="true"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/you_have"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9sp"
+                android:layout_below="@id/popUp_userName"
+                android:text="You have received a code "
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/avai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/you_have"
+                android:layout_marginTop="20dp"
+                android:text="Thanks for checking this..."
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/attem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/avai"
+                android:text="Attempt"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="25dp"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/attempts"
+                android:layout_toEndOf="@id/attem"
+                android:layout_below="@id/avai"
+                android:textStyle="bold"
+                android:layout_marginTop="25dp"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimary"/>
+
+
+            <TextView
+                android:id="@+id/note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/attem"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/bottomLay"
+            android:layout_width="match_parent"
+            android:layout_below="@id/rl"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/okayPopup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@color/colorPrimary"
+                android:padding="15dp"
+                android:singleLine="true"
+                android:textSize="18sp"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
