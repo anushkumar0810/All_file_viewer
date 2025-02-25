@@ -5,11 +5,15 @@ import android.os.Bundle;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.allfilepicker.Adapters.ImageAdapter;
 import com.example.allfilepicker.R;
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 import android.Manifest;
@@ -75,7 +79,6 @@ public class ImageFragment extends Fragment {
                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSIONS);
             }
         } else {
-            // For Android versions below Marshmallow
             loadImages();
         }
     }
@@ -104,6 +107,9 @@ public class ImageFragment extends Fragment {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+
+
         if (requestCode == REQUEST_PERMISSIONS) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 loadImages();

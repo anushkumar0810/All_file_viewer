@@ -3,6 +3,9 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
-    <color name="tabSelectedTextColor">#FFFFFF</color>
+    <color name="tabSelectedTextColor">#000000</color>
     <color name="tabUnselectedTextColor">#8A8A8A</color>
+
+    <color name="primary_text">#000000</color>
+    <color name="primary_bg">#D4D4D4</color>
 </resources>

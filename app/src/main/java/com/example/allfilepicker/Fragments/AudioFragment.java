@@ -51,8 +51,8 @@ public class AudioFragment extends Fragment {
                 MediaStore.Audio.Media.TITLE,
                 MediaStore.Audio.Media.ARTIST,
                 MediaStore.Audio.Media.DURATION,
-                MediaStore.Audio.Media.DATA,   // File path
-                MediaStore.Audio.Media.ALBUM_ID  // Album ID for album art
+                MediaStore.Audio.Media.DATA,
+                MediaStore.Audio.Media.ALBUM_ID
         };
 
         try (Cursor cursor = getContext().getContentResolver().query(uri, projection, null, null, null)) {

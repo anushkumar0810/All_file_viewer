@@ -27,32 +27,30 @@ import java.io.IOException;
 public class MediaDialog extends DialogFragment {
 
     private MediaPlayer mediaPlayer;
-    private VideoView videoView; // Added VideoView reference
+    private VideoView videoView;
     private String mediaType;
     private String mediaPath;
     private String audioName;
     private String albumImagePath;
+    private SeekBar seekBar;
+    private SeekBar seekBarVideo;
+    private TextView runningTime;
+    private TextView runningTimeVideo;
+    private TextView fixedTime;
+    private TextView fixedTimeVideo;
+    private Handler handler = new Handler();
 
-    private SeekBar seekBar; // For audio
-    private SeekBar seekBarVideo; // For video
-    private TextView runningTime; // For audio
-    private TextView runningTimeVideo; // For video
-    private TextView fixedTime; // For audio
-    private TextView fixedTimeVideo; // For video
-    private Handler handler = new Handler(); // To update SeekBar and time display
-
-    // Runnable for updating the SeekBar
     private Runnable updateSeekBarRunnable = new Runnable() {
         @Override
         public void run() {
             if (mediaType.equals("audio") && mediaPlayer != null && mediaPlayer.isPlaying()) {
                 seekBar.setProgress(mediaPlayer.getCurrentPosition());
                 runningTime.setText(formatTime(mediaPlayer.getCurrentPosition()));
-                handler.postDelayed(this, 1000); // Update every second
+                handler.postDelayed(this, 1000);
             } else if (mediaType.equals("video") && videoView != null && videoView.isPlaying()) {
                 seekBarVideo.setProgress(videoView.getCurrentPosition());
                 runningTimeVideo.setText(formatTime(videoView.getCurrentPosition()));
-                handler.postDelayed(this, 1000); // Update every second
+                handler.postDelayed(this, 1000);
             }
         }
     };
@@ -113,9 +111,9 @@ public class MediaDialog extends DialogFragment {
             ImageView imageView = view.findViewById(R.id.image_view);
             Glide.with(requireContext()).load(mediaPath).into(imageView);
         } else if ("video".equals(mediaType)) {
-            setupVideoPlayer(view, mediaPath); // Set up video player
+            setupVideoPlayer(view, mediaPath);
         } else if ("audio".equals(mediaType)) {
-            setupAudioPlayer(view, mediaPath, audioName, albumImagePath); // Set up audio player
+            setupAudioPlayer(view, mediaPath, audioName, albumImagePath);
         }
 
         close.setOnClickListener(v -> dismiss());
@@ -133,7 +131,7 @@ public class MediaDialog extends DialogFragment {
         videoView.setOnPreparedListener(mp -> {
             seekBarVideo.setMax(videoView.getDuration());
             fixedTimeVideo.setText(formatTime(videoView.getDuration()));
-            handler.post(updateSeekBarRunnable); // Start updating the SeekBar
+            handler.post(updateSeekBarRunnable);
         });
 
         playPauseButtonVideo.setOnClickListener(v -> togglePlayPauseVideo(playPauseButtonVideo));
@@ -149,13 +147,13 @@ public class MediaDialog extends DialogFragment {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                handler.removeCallbacks(updateSeekBarRunnable); // Stop updating during drag
+                handler.removeCallbacks(updateSeekBarRunnable);
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                videoView.seekTo(seekBar.getProgress()); // Seek to the new position
-                handler.post(updateSeekBarRunnable); // Resume updates
+                videoView.seekTo(seekBar.getProgress());
+                handler.post(updateSeekBarRunnable);
             }
         });
     }
@@ -171,7 +169,7 @@ public class MediaDialog extends DialogFragment {
         audioFileName.setText(audioName);
         audioFileName.setSelected(true);
 
-        // Load album art using Glide
+
         if (albumArt != null && !albumArt.isEmpty()) {
             Glide.with(requireContext()).load(albumArt).placeholder(R.drawable.img).error(R.drawable.img).into(audioImage);
         } else {
@@ -185,7 +183,7 @@ public class MediaDialog extends DialogFragment {
             mediaPlayer.setOnPreparedListener(mp -> {
                 seekBar.setMax(mediaPlayer.getDuration());
                 fixedTime.setText(formatTime(mediaPlayer.getDuration()));
-                handler.post(updateSeekBarRunnable); // Start updating the SeekBar
+                handler.post(updateSeekBarRunnable);
             });
         } catch (IOException e) {
             e.printStackTrace();
@@ -193,7 +191,7 @@ public class MediaDialog extends DialogFragment {
 
         playPauseButton.setOnClickListener(v -> togglePlayPause(playPauseButton));
 
-        // SeekBar listener to update media position
+
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -204,13 +202,13 @@ public class MediaDialog extends DialogFragment {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                handler.removeCallbacks(updateSeekBarRunnable); // Stop updating during drag
+                handler.removeCallbacks(updateSeekBarRunnable);
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                mediaPlayer.seekTo(seekBar.getProgress()); // Seek to the new position
-                handler.post(updateSeekBarRunnable); // Resume updates
+                mediaPlayer.seekTo(seekBar.getProgress());
+                handler.post(updateSeekBarRunnable);
             }
         });
     }
@@ -225,11 +223,11 @@ public class MediaDialog extends DialogFragment {
         if (mediaPlayer != null && mediaPlayer.isPlaying()) {
             mediaPlayer.pause();
             playPauseButton.setImageResource(R.drawable.ic_play);
-            handler.removeCallbacks(updateSeekBarRunnable); // Stop updates when paused
+            handler.removeCallbacks(updateSeekBarRunnable);
         } else if (mediaPlayer != null) {
             mediaPlayer.start();
             playPauseButton.setImageResource(R.drawable.ic_pause);
-            handler.post(updateSeekBarRunnable); // Resume updates when playing
+            handler.post(updateSeekBarRunnable);
         }
     }
 
@@ -237,11 +235,11 @@ public class MediaDialog extends DialogFragment {
         if (videoView.isPlaying()) {
             videoView.pause();
             playPauseButton.setImageResource(R.drawable.ic_play);
-            handler.removeCallbacks(updateSeekBarRunnable); // Stop updates when paused
+            handler.removeCallbacks(updateSeekBarRunnable);
         } else {
             videoView.start();
             playPauseButton.setImageResource(R.drawable.ic_pause);
-            handler.post(updateSeekBarRunnable); // Resume updates when playing
+            handler.post(updateSeekBarRunnable);
         }
     }
 
@@ -255,6 +253,6 @@ public class MediaDialog extends DialogFragment {
         if (videoView != null) {
             videoView.stopPlayback();
         }
-        handler.removeCallbacks(updateSeekBarRunnable); // Clean up the handler
+        handler.removeCallbacks(updateSeekBarRunnable);
     }
 }

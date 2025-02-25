@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_gravity="center"
     android:background="@drawable/dialog_bg">
 
     <!-- ImageView Layout -->
@@ -12,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_margin="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,9 +29,8 @@
             <ImageView
                 android:id="@+id/image_view"
                 android:layout_width="350dp"
-                android:layout_height="300dp"
-                android:src="@drawable/img" />
-
+                android:layout_height="wrap_content"
+                android:src="@drawable/app_icon" />
 
         </androidx.cardview.widget.CardView>
 
@@ -42,7 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="visible"
+        android:visibility="gone"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,10 +52,11 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/card"
             android:layout_width="300dp"
-            android:layout_height="200dp"
+            android:layout_height="350dp"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_marginTop="30dp"
+            android:backgroundTint="#000000"
             app:cardCornerRadius="20dp">
 
             <VideoView
@@ -146,7 +147,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/img" />
+                android:src="@drawable/app_icon" />
+
         </androidx.cardview.widget.CardView>
 
         <TextView
